@@ -1,0 +1,21 @@
+{
+  "name": "skill_claude_tainmat",
+  "owner": {
+    "name": "Tainmat"
+  },
+  "metadata": {
+    "description": "Skills personalizadas do Tainmat para Claude Code",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "pr-code-review",
+      "description": "Code review completo de PRs comparando com a branch develop, com relatório em Markdown",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/pr-code-review"
+      ]
+    }
+  ]
+}
