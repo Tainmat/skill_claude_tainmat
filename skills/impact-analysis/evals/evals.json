@@ -1,0 +1,17 @@
+{
+  "skill_name": "impact-analysis",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Preciso implementar uma funcionalidade de agendamento para clientes sem cadastro no sistema. O usuário deve poder agendar contatos para potenciais clientes ou leads que ainda não possuem cadastro vinculado.\n\nO que fazer:\n- Implementar funcionalidade de agendamento para clientes sem cadastro\n- Desenvolver lógica para salvar agendamento sem vínculo obrigatório a cadastro\n- Adicionar campos mínimos necessários\n- Implementar validações para dados obrigatórios\n- Criar visualização de agendamentos sem vínculo cadastral\n- Permitir conversão posterior do agendamento em cadastro completo\n- Implementar notificações para agendamentos criados\n\nNão sei exatamente em qual arquivo ou pasta isso deve ser feito.",
+      "expected_output": "Relatório em Markdown com seções: Tarefa, Local da Alteração, Arquivos Envolvidos, Fluxo da Funcionalidade, Pontos Críticos, Impactos no Sistema, Checklist de Testes",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "Quero corrigir um bug onde agendamentos de clientes sem cadastro não aparecem no calendário/listagem principal. Não sei exatamente qual arquivo é responsável por isso.",
+      "expected_output": "Relatório em Markdown identificando arquivos de calendário/listagem, pontos críticos e checklist de testes focado em regressões",
+      "files": []
+    }
+  ]
+}

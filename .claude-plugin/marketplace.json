@@ -16,6 +16,15 @@
       "skills": [
         "./skills/pr-code-review"
       ]
+    },
+    {
+      "name": "impact-analysis",
+      "description": "Analisa o impacto de uma alteração antes de implementá-la, identificando arquivos afetados, pontos críticos e gerando checklist de testes em Markdown",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/impact-analysis"
+      ]
     }
   ]
 }
