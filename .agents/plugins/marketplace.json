@@ -1,0 +1,20 @@
+{
+  "name": "tainmat-skills",
+  "interface": {
+    "displayName": "Tainmat Skills"
+  },
+  "plugins": [
+    {
+      "name": "pr-code-review",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pr-code-review"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
