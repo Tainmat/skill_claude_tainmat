@@ -7,8 +7,10 @@
     {
       "name": "pr-code-review",
       "source": {
-        "source": "local",
-        "path": "./plugins/pr-code-review"
+        "source": "git-subdir",
+        "url": "https://github.com/tainmat/skill_claude_tainmat.git",
+        "path": "./plugins/pr-code-review",
+        "ref": "main"
       },
       "policy": {
         "installation": "AVAILABLE",

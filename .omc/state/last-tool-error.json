@@ -1,7 +1,0 @@
-{
-  "tool_name": "Read",
-  "tool_input_preview": "{\"file_path\":\"/home/tainmat/projetos/skill_claude_tainmat/marketplace.json\"}",
-  "error": "File does not exist. Note: your current working directory is /home/tainmat/projetos/skill_claude_tainmat.",
-  "timestamp": "2026-05-04T13:13:26.870Z",
-  "retry_count": 1
-}
