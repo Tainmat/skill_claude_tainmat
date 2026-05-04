@@ -1,6 +1,6 @@
 ---
 name: pr-code-review
-description: Realiza code review completo da branch atual comparando com a branch develop no ponto exato onde a branch foi criada (merge-base). Analisa arquivos .ts, .tsx, .js e .jsx em busca de bugs, problemas de performance e boas práticas. Gera um relatório em Português do Brasil com os arquivos alterados e seus ranges de linhas, problemas classificados por severidade (CRITICO, AVISO, SUGESTAO), explicação do problema e sugestão de correção. Use esta skill sempre que o usuário pedir para revisar o código, fazer code review, verificar a PR, analisar mudanças da branch, checar bugs ou pedir um relatório de alterações.
+description: "Code review, PR review, revisar código, checar bugs — analisa a branch atual vs develop (merge-base) em arquivos .ts/.tsx/.js/.jsx e gera relatório Markdown em PT-BR com problemas classificados por severidade: CRITICO, AVISO, SUGESTAO."
 ---
 
 # PR Code Review

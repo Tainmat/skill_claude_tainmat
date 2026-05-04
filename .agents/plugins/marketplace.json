@@ -1,0 +1,21 @@
+{
+  "name": "tainmat-skills",
+  "interface": {
+    "displayName": "Tainmat Skills"
+  },
+  "plugins": [
+    {
+      "name": "pr-code-review",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/tainmat/skill_claude_tainmat.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
