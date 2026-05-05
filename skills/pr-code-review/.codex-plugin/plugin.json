@@ -1,0 +1,6 @@
+{
+  "name": "pr-code-review",
+  "version": "0.1.0",
+  "description": "Code review completo de PRs comparando com a branch develop, com relatório em Markdown.",
+  "skills": "./"
+}
