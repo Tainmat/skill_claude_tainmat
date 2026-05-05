@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Skills personalizadas do Tainmat para Claude Code",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
@@ -13,18 +13,21 @@
       "description": "Code review completo de PRs comparando com a branch develop, com relatório em Markdown",
       "source": "./",
       "strict": false,
-      "skills": [
-        "./skills/pr-code-review"
-      ]
+      "skills": ["./skills/pr-code-review"]
     },
     {
       "name": "impact-analysis",
       "description": "Analisa o impacto de uma alteração antes de implementá-la, identificando arquivos afetados, pontos críticos e gerando checklist de testes em Markdown",
       "source": "./",
       "strict": false,
-      "skills": [
-        "./skills/impact-analysis"
-      ]
+      "skills": ["./skills/impact-analysis"]
+    },
+    {
+      "name": "code-flow-mapper",
+      "description": "Mapeia a árvore de execução bidirecional (downstream + upstream) de um ponto de entrada no código, gerando relatório Markdown com diagrama Mermaid e checklist de pontos de toque",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/code-flow-mapper"]
     }
   ]
 }

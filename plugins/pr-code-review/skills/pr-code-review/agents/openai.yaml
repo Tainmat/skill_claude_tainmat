@@ -1,6 +1,0 @@
-interface:
-  display_name: "PR Code Review"
-  short_description: "Code review completo da branch vs develop, relatório Markdown com CRITICO/AVISO/SUGESTAO"
-
-policy:
-  allow_implicit_invocation: true
