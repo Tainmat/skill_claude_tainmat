@@ -2,5 +2,5 @@
   "name": "code-flow-mapper",
   "version": "0.1.0",
   "description": "Mapeia a árvore de execução bidirecional (downstream + upstream) de um ponto de entrada no código, gerando relatório Markdown com diagrama Mermaid e checklist de pontos de toque.",
-  "skills": "./"
+  "skills": "./skills/"
 }

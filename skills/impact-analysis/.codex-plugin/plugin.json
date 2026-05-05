@@ -2,5 +2,5 @@
   "name": "impact-analysis",
   "version": "0.1.0",
   "description": "Analisa o impacto de uma alteração antes de implementá-la, identificando arquivos afetados, pontos críticos e gerando checklist de testes em Markdown.",
-  "skills": "./"
+  "skills": "./skills/"
 }
