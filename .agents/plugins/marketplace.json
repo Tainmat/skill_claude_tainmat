@@ -7,10 +7,8 @@
     {
       "name": "pr-code-review",
       "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/Tainmat/skill_claude_tainmat.git",
-        "path": "./skills/pr-code-review",
-        "ref": "main"
+        "source": "local",
+        "path": "./plugins/pr-code-review"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -21,10 +19,8 @@
     {
       "name": "impact-analysis",
       "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/Tainmat/skill_claude_tainmat.git",
-        "path": "./skills/impact-analysis",
-        "ref": "main"
+        "source": "local",
+        "path": "./plugins/impact-analysis"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -35,10 +31,8 @@
     {
       "name": "code-flow-mapper",
       "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/Tainmat/skill_claude_tainmat.git",
-        "path": "./skills/code-flow-mapper",
-        "ref": "main"
+        "source": "local",
+        "path": "./plugins/code-flow-mapper"
       },
       "policy": {
         "installation": "AVAILABLE",
