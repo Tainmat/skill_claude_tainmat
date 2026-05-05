@@ -1,0 +1,15 @@
+{
+  "name": "impact-analysis",
+  "version": "1.0.0",
+  "description": "Analyzes the impact of a planned change before implementation, identifying affected files, critical points, and generating a test checklist in Markdown.",
+  "author": { "name": "Tainmat" },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Impact Analysis",
+    "shortDescription": "Análise de impacto pré-implementação com checklist de testes",
+    "longDescription": "Identifica arquivos afetados, pontos críticos e gera checklist de testes em Markdown antes de implementar uma mudança.",
+    "developerName": "Tainmat",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"]
+  }
+}

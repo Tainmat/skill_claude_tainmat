@@ -1,0 +1,6 @@
+interface:
+  display_name: "Code Flow Mapper"
+  short_description: "Mapeia execução bidirecional (downstream + upstream) com checklist de pontos de toque"
+
+policy:
+  allow_implicit_invocation: true

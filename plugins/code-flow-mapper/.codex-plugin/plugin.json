@@ -1,0 +1,17 @@
+{
+  "name": "code-flow-mapper",
+  "version": "0.1.0",
+  "description": "Maps the bidirectional execution tree (downstream + upstream) of a code entry point to support change impact analysis. Receives a function, component, hook, or method with file/line, traces what the code uses and who uses the code, and generates a Markdown report in Portuguese with a Mermaid diagram and a checklist of touch points.",
+  "author": {
+    "name": "Tainmat"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Code Flow Mapper",
+    "shortDescription": "Mapeamento bidirecional de execução (downstream + upstream) com checklist de pontos de toque",
+    "longDescription": "Recebe um ponto de entrada (função, componente, hook, método) com arquivo e linha, e mapeia tanto o que o código consome (downstream — chamadas, hooks, side effects) quanto quem depende dele (upstream — call sites, testes, mocks, re-exports). Gera relatório Markdown em PT-BR salvo em docs/flows/, com profundidade adaptativa e checklist prático para a mudança planejada.",
+    "developerName": "Tainmat",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"]
+  }
+}

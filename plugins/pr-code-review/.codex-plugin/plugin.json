@@ -1,0 +1,17 @@
+{
+  "name": "pr-code-review",
+  "version": "1.0.0",
+  "description": "PR code review comparing current branch vs develop (merge-base). Analyzes .ts, .tsx, .js, .jsx files for bugs, performance issues, and best practice violations. Generates a Markdown report in Portuguese with severity ratings.",
+  "author": {
+    "name": "Tainmat"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "PR Code Review",
+    "shortDescription": "Full PR review vs develop branch with Markdown report in Portuguese",
+    "longDescription": "Reviews all changes in the current branch against develop (merge-base), identifying bugs (CRITICO), performance issues (AVISO), and best practice violations (SUGESTAO). Generates a structured Markdown report saved at the project root.",
+    "developerName": "Tainmat",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"]
+  }
+}

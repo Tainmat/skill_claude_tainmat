@@ -1,0 +1,6 @@
+interface:
+  display_name: "Impact Analysis"
+  short_description: "Análise de impacto pré-implementação com checklist de testes"
+
+policy:
+  allow_implicit_invocation: true
