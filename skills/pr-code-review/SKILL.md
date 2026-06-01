@@ -219,7 +219,8 @@ Exemplo de formato:
 - **Arquivo de saida**: salve o relatorio como `code-review-<nome-da-branch>.md` na raiz do projeto (mesmo nivel do `package.json`). Apos salvar, informe o caminho completo ao usuario.
 - **Foco no diff**: analise apenas o codigo que foi adicionado ou modificado (linhas com `+` no diff). Nao reporte problemas em codigo pre-existente que nao foi tocado pela PR, a menos que a mudanca da PR introduza uma interacao problematica com ele.
 - **Contexto e rei**: antes de reportar um problema, considere se o padrao pode ser intencional dado o contexto do projeto (ex: certos padroes de performance podem ser aceitaveis em componentes nao criticos).
-- **Sem falsos positivos**: e melhor reportar menos problemas reais do que muitos problemas duvidosos. Se nao tiver certeza, omita ou classifique como SUGESTAO com ressalva.
+- **Sem falsos positivos**: e melhor reportar menos problemas reais do que muitos problemas duvidosos. Se nao tiver certeza, omita. Nao invente problemas para parecer util.
+- **APROVADO**: se nao houver nenhum problema real, diga claramente `✅ APROVADO — nenhum problema encontrado.` no Resumo Final. Nao force SUGESTOEs desnecessarias so para preencher o relatorio.
 - **Codigo de correcao**: quando a correcao for codigo, mostra o trecho relevante corrigido, nao o arquivo inteiro.
 - **Testes**: a secao de sugestoes de teste deve ser pratica e objetiva — cenarios reais que um QA ou o proprio desenvolvedor consiga executar manualmente em poucos minutos.
 - **Severidades**:

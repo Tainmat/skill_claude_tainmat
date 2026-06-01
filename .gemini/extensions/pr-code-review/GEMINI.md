@@ -203,7 +203,8 @@ qual o risco para o usuario ou sistema>
 - **Arquivo de saida**: salve o relatorio como `code-review-<nome-da-branch>.md` na raiz do projeto. Apos salvar, informe o caminho completo ao usuario.
 - **Foco no diff**: analise apenas o codigo que foi adicionado ou modificado (linhas com `+` no diff). Nao reporte problemas em codigo pre-existente que nao foi tocado pela PR.
 - **Contexto e rei**: antes de reportar um problema, considere se o padrao pode ser intencional dado o contexto do projeto.
-- **Sem falsos positivos**: e melhor reportar menos problemas reais do que muitos problemas duvidosos. Se nao tiver certeza, omita ou classifique como SUGESTAO com ressalva.
+- **Sem falsos positivos**: e melhor reportar menos problemas reais do que muitos problemas duvidosos. Se nao tiver certeza, omita. Nao invente problemas para parecer util.
+- **APROVADO**: se nao houver nenhum problema real, diga claramente `✅ APROVADO — nenhum problema encontrado.` no Resumo Final. Nao force SUGESTOEs desnecessarias so para preencher o relatorio.
 - **Severidades**:
   - `CRITICO` — pode causar bug, crash, falha de seguranca ou perda de dados
   - `AVISO` — degradacao de performance, comportamento inesperado em edge cases, violacao de padrao do projeto
