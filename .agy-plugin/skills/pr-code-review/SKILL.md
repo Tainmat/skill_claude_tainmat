@@ -1,3 +1,8 @@
+---
+name: pr-code-review
+description: "Code review, PR review, revisar código, checar bugs — analisa a branch atual vs develop (merge-base) em arquivos .ts/.tsx/.js/.jsx e gera relatório Markdown em PT-BR com problemas classificados por severidade: CRITICO, AVISO, SUGESTAO."
+---
+
 # PR Code Review
 
 ## Objetivo
@@ -187,11 +192,22 @@ qual o risco para o usuario ou sistema>
 
 ### O que deve ser testado (funcionalidades implementadas)
 
+<Lista dos cenarios de teste feliz (happy path) relacionados ao que a PR
+implementou. Para cada funcionalidade nova ou modificada, descreva o que
+o testador deve verificar manualmente ou via testes automatizados.>
+
+Exemplo de formato:
 - [ ] <Cenario de teste 1: descreva a acao e o resultado esperado>
 - [ ] <Cenario de teste 2>
 
 ### O que pode ter quebrado (regressões)
 
+<Lista de funcionalidades preexistentes que podem ter sido afetadas pelas
+mudancas desta PR — mesmo que indiretamente. Pense em: componentes que
+importam os arquivos alterados, fluxos que dependem dos comportamentos
+modificados, edge cases que a mudanca pode ter alterado.>
+
+Exemplo de formato:
 - [ ] <Risco de regressao 1: descreva o que pode ter quebrado e como verificar>
 - [ ] <Risco de regressao 2>
 ```
@@ -200,11 +216,13 @@ qual o risco para o usuario ou sistema>
 
 ## Notas importantes
 
-- **Arquivo de saida**: salve o relatorio como `code-review-<nome-da-branch>.md` na raiz do projeto. Apos salvar, informe o caminho completo ao usuario.
-- **Foco no diff**: analise apenas o codigo que foi adicionado ou modificado (linhas com `+` no diff). Nao reporte problemas em codigo pre-existente que nao foi tocado pela PR.
-- **Contexto e rei**: antes de reportar um problema, considere se o padrao pode ser intencional dado o contexto do projeto.
+- **Arquivo de saida**: salve o relatorio como `code-review-<nome-da-branch>.md` na raiz do projeto (mesmo nivel do `package.json`). Apos salvar, informe o caminho completo ao usuario.
+- **Foco no diff**: analise apenas o codigo que foi adicionado ou modificado (linhas com `+` no diff). Nao reporte problemas em codigo pre-existente que nao foi tocado pela PR, a menos que a mudanca da PR introduza uma interacao problematica com ele.
+- **Contexto e rei**: antes de reportar um problema, considere se o padrao pode ser intencional dado o contexto do projeto (ex: certos padroes de performance podem ser aceitaveis em componentes nao criticos).
 - **Sem falsos positivos**: e melhor reportar menos problemas reais do que muitos problemas duvidosos. Se nao tiver certeza, omita. Nao invente problemas para parecer util.
 - **APROVADO**: se nao houver nenhum problema real, diga claramente `✅ APROVADO — nenhum problema encontrado.` no Resumo Final. Nao force SUGESTOEs desnecessarias so para preencher o relatorio.
+- **Codigo de correcao**: quando a correcao for codigo, mostra o trecho relevante corrigido, nao o arquivo inteiro.
+- **Testes**: a secao de sugestoes de teste deve ser pratica e objetiva — cenarios reais que um QA ou o proprio desenvolvedor consiga executar manualmente em poucos minutos.
 - **Severidades**:
   - `CRITICO` — pode causar bug, crash, falha de seguranca ou perda de dados
   - `AVISO` — degradacao de performance, comportamento inesperado em edge cases, violacao de padrao do projeto

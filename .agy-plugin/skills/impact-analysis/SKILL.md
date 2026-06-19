@@ -1,3 +1,8 @@
+---
+name: impact-analysis
+description: Analisa o impacto de uma alteração antes de implementá-la. Identifica arquivos afetados, mapeia o fluxo da funcionalidade, aponta pontos críticos e gera um checklist de testes. Use esta skill sempre que o usuário quiser entender o impacto de uma mudança, correção de bug ou nova feature antes de codar — mesmo que diga "o que pode quebrar?", "onde fica isso?", "que arquivos são afetados?", "me ajuda a planejar essa alteração" ou simplesmente descreva uma mudança que quer fazer.
+---
+
 # Impact Analysis
 
 ## Objetivo

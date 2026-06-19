@@ -1,3 +1,8 @@
+---
+name: code-flow-mapper
+description: "Use esta skill quando o usuário precisar entender como uma funcionalidade existente funciona ANTES de alterá-la, mapeando a árvore de chamadas (call tree) bidirecional. Triggers: 'mapear o fluxo de', 'engenharia reversa de', 'preciso entender como X funciona antes de mexer', 'rastreia a call tree de', 'quem chama essa função', 'o que essa função usa', 'mostra o fluxo de execução'. Recebe um ponto de entrada (função, componente, hook, método) com arquivo e linha, rastreia downstream (o que o código chama) E upstream (quem chama o código), e gera um relatório Markdown em PT-BR com diagrama Mermaid e checklist de pontos de toque. NÃO use para diagnóstico de bug em produção, code review estilístico, geração de documentação geral, ou análise de impacto de alto nível (essa última pertence à skill impact-analysis)."
+---
+
 # Code Flow Mapper
 
 ## Objetivo
@@ -12,6 +17,8 @@ O mapeamento é **bidirecional**:
 O output é um relatório Markdown em PT-BR cuja profundidade se adapta ao tamanho e à criticidade do ponto de entrada.
 
 ### Diferença para `impact-analysis`
+
+Se já houver no marketplace uma skill `impact-analysis`, distinga-as assim:
 
 - **`impact-analysis`** — análise de alto nível antes da implementação: lista de arquivos afetados, pontos críticos, checklist de testes.
 - **`code-flow-mapper`** — rastreio detalhado da **execução**: call tree linha-a-linha, hooks consumidos, side effects específicos, callers reais.
@@ -50,7 +57,7 @@ Não anuncie a categoria escolhida ao usuário — apenas use-a internamente par
 
 A partir da definição, leia o corpo e identifique:
 
-1. **Chamadas de função relevantes** — entre nos arquivos correspondentes e siga até no máximo 4 níveis de profundidade.
+1. **Chamadas de função relevantes** — entre nos arquivos correspondentes e siga até no máximo 4 níveis de profundidade. Pode ir mais fundo se um ramo específico for diretamente relevante para a mudança planejada.
 2. **Hooks consumidos** (`useContext`, `useSelector`, hooks customizados) — anote qual estado/contexto leem.
 3. **Imports de tipos e interfaces** — importam algum tipo que será impactado pela mudança?
 4. **Efeitos colaterais**:
@@ -70,29 +77,31 @@ A partir da definição, leia o corpo e identifique:
 
 ## Passo 4 — Rastreio Upstream (quem usa este código)
 
-Use ferramentas de busca disponíveis para encontrar:
+Esta é a parte mais crítica para análise de impacto e é frequentemente esquecida. Use as ferramentas disponíveis no ambiente (grep, ripgrep, busca do editor, ferramentas de busca textual do agente) para encontrar:
 
 1. **Call sites diretos** — todos os arquivos que importam e chamam o símbolo.
 2. **Re-exports** — o símbolo é re-exportado de algum `index.ts`? Se sim, callers podem estar referenciando o caminho do barrel, não o original.
-3. **Testes** — arquivos `.test.ts(x)` ou `.spec.ts(x)` que cobrem o símbolo.
+3. **Testes** — arquivos `.test.ts(x)` ou `.spec.ts(x)` que cobrem o símbolo. A presença ou ausência de testes muda a estratégia da mudança.
 4. **Mocks** — o símbolo aparece mockado em algum lugar? Se sim, mudar a assinatura quebra os mocks.
 5. **Storybook ou fixtures** — para componentes, há stories ou dados de exemplo que usam o componente?
 
-Para cada call site, registre **como** o símbolo é usado (qual argumento passa, o que faz com o retorno).
+Para cada call site, registre **como** o símbolo é usado (qual argumento passa, o que faz com o retorno). Isso é o que permite avaliar se a mudança planejada quebra o caller.
 
 ---
 
 ## Passo 5 — Mapear estado compartilhado
 
-Se o ponto de entrada **lê ou escreve** em estado global (Redux store, Context, Zustand, query cache do React Query, etc.), liste **outros consumidores desse mesmo estado**.
+Se o ponto de entrada **lê ou escreve** em estado global (Redux store, Context, Zustand, query cache do React Query, etc.), liste **outros consumidores desse mesmo estado**. Eles não chamam a função diretamente, mas podem ser afetados se a forma do estado mudar.
 
-Exemplo: se a função faz `dispatch(setUser(payload))`, busque todos os componentes que fazem `useSelector(state => state.user)`.
+Exemplo: se a função faz `dispatch(setUser(payload))`, busque todos os componentes que fazem `useSelector(state => state.user)` — eles precisam ser revisados se o shape de `user` mudar.
 
 ---
 
 ## Passo 6 — Gerar relatório Markdown
 
-Salve em `docs/flows/fluxo-<nomeDoSimbolo>.md` (cria a pasta se não existir).
+Salve em `docs/flows/fluxo-<nomeDoSimbolo>.md` (cria a pasta se não existir). Se o projeto já tiver convenção de pasta para documentação interna, prefira ela.
+
+A estrutura abaixo é um **superconjunto** — adapte conforme a categoria definida no Passo 2:
 
 ```markdown
 # Mapeamento de Fluxo: `<nomeDoSimbolo>`
@@ -106,32 +115,41 @@ Salve em `docs/flows/fluxo-<nomeDoSimbolo>.md` (cria a pasta se não existir).
 
 ## 📌 Resumo da Funcionalidade
 
-Parágrafo curto: o que esse código faz na prática, em uma frase de negócio.
+Parágrafo curto: o que esse código faz na prática, em uma frase de negócio (não em uma frase técnica).
 
 ## 📐 Contrato
 
 ### Entradas
+
 - `param` (`tipo`): origem e formato esperado.
 
 ### Saída
+
 - Tipo: `<tipo>`. Forma: `<descrição do shape>`.
 
 ### Pré-condições / Pós-condições
+
 - Condições assumidas antes da chamada e garantias após (se houver).
 
 ## 🗺️ Diagrama
 
-(Apenas para categoria Média ou Grande.)
+(Apenas para categoria Média ou Grande. Escolha o tipo:)
+
+- `flowchart TD` — para fluxo de dados e transformações.
+- `sequenceDiagram` — para interações async (API, eventos).
+- `graph TD` — para hierarquia de componentes.
 
 ## ⬇️ Downstream — O que este código usa
 
 1. **`<nomeDoSimbolo>()`** (`<arquivo>:<linha>`)
    - 1.1 Chama `funçãoA()` (`<arquivo>`) — o que ela faz em uma linha.
+     - 1.1.1 Chama `funçãoB()` (`<arquivo>`) — ...
    - 1.2 Hook `useX()` — lê `<estado>`.
    - 1.3 Módulo externo: `axios` — POST para `<endpoint>`.
 
 ### Efeitos colaterais
-- **Network**: `<método> <endpoint>`.
+
+- **Network**: `<método> <endpoint>` (payload: `<descrição>`).
 - **Estado**: `dispatch(<action>)` altera `<slice>`.
 - **Browser**: grava em `localStorage['<chave>']`.
 - **Navegação**: `router.push('<rota>')`.
@@ -140,37 +158,57 @@ Parágrafo curto: o que esse código faz na prática, em uma frase de negócio.
 
 ### Call sites
 
-| Arquivo     | Linha     | Como é usado |
-| ----------- | --------- | ------------ |
-| `<caminho>` | `<linha>` | `<descrição>` |
+| Arquivo     | Linha     | Como é usado                                                            |
+| ----------- | --------- | ----------------------------------------------------------------------- |
+| `<caminho>` | `<linha>` | `<descrição curta — ex: "passa formData direto, espera Promise<User>">` |
+
+### Re-exports
+
+- Exportado também via `<barrel.ts>` — buscar referências por esse caminho também.
 
 ### Testes
-- ✅ Coberto em `<arquivo.test.tsx>`.
+
+- ✅ Coberto em `<arquivo.test.tsx>` — cenários: `<lista curta>`.
 - ⚠️ Sem cobertura direta de teste.
 
 ### Mocks e fixtures
+
 - Mockado em `<setup ou arquivo>` — atenção ao alterar assinatura.
 
 ## 🔄 Estado compartilhado
 
+(Apenas se o código lê/escreve estado global.)
+
 O código mexe em `<slice/contexto>`. Outros consumidores deste estado:
+
 - `<arquivo>` — `<como consome>`.
 
 ## ✅ Checklist de pontos de toque para a mudança
 
-- [ ] **Se alterar a assinatura**: atualize os N call sites listados acima.
-- [ ] **Se alterar o retorno**: revise os callers que consomem o retorno.
+(Esta é a seção que o usuário vai usar de verdade ao codar.)
+
+Considerando a mudança planejada (`<descrição>`), revise:
+
+- [ ] **Se alterar a assinatura** (parâmetros): atualize os N call sites listados acima.
+- [ ] **Se alterar o retorno** (tipo ou shape): revise os callers que consomem o retorno — em particular `<arquivo>` que faz `<uso específico>`.
+- [ ] **Se remover/alterar o efeito X**: avise/ajuste os consumidores do estado compartilhado.
+- [ ] **Se mudar o tipo importado**: rebuilde os tipos derivados em `<arquivo>`.
 - [ ] **Testes a atualizar**: `<lista>` ou **criar teste novo** se não houver cobertura.
 - [ ] **Mocks a atualizar**: `<lista>`.
+
+## 📝 Observações
+
+(Opcional. Inclua somente se houver algo realmente útil — acoplamentos suspeitos, dívida técnica relevante para a mudança, hooks com `deps` array problemático, etc. Se não houver nada notável, omita a seção inteira.)
 ```
 
 ---
 
 ## Regras de comportamento
 
-- **Não invente arquivos**. Se uma busca upstream não retornou nada, escreva "Sem call sites encontrados no escopo analisado".
-- **Adapte ao tamanho**. Função pequena não precisa de diagrama nem de seção de estado compartilhado.
+- **Não invente arquivos**. Se uma busca upstream não retornou nada, escreva "Sem call sites encontrados no escopo analisado" — não preencha por preencher.
+- **Adapte ao tamanho**. Função pequena não precisa de diagrama nem de seção de estado compartilhado se ela não toca estado. Não force as seções todas.
 - **Linguagem PT-BR**, mas mantenha termos técnicos em inglês quando forem mais claros (`call site`, `hook`, `dispatch`, `state`).
-- **Foco no que muda**. O relatório é uma ferramenta de pré-mudança, não uma documentação eterna.
-- **Bibliotecas externas**: registre como "módulo externo: `nome`" e siga em frente.
-- **Se o ponto de entrada não for encontrado**: pare e peça confirmação do nome/arquivo.
+- **Foco no que muda**. O relatório é uma ferramenta de pré-mudança, não uma documentação eterna. Detalhes irrelevantes para a mudança planejada devem ser cortados.
+- **Confirme antes de aprofundar muito**. Em código grande, depois do mapeamento inicial, pergunte ao usuário se quer aprofundar algum ramo específico antes de gastar contexto rastreando 4 níveis em todas as branches.
+- **Bibliotecas externas**: registre como "módulo externo: `nome`" e siga em frente — não tente abrir node_modules.
+- **Se o ponto de entrada não for encontrado**: pare e peça confirmação do nome/arquivo. Não tente adivinhar.

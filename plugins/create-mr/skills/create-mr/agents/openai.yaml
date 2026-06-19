@@ -1,0 +1,6 @@
+interface:
+  display_name: "Create MR"
+  short_description: "Gera MR-<branch>.md na raiz do projeto com título e descrição do Merge Request. Sem push, sem GitLab."
+
+policy:
+  allow_implicit_invocation: true

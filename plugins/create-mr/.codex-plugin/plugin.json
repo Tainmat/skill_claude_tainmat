@@ -1,0 +1,17 @@
+{
+  "name": "create-mr",
+  "version": "1.0.0",
+  "description": "Generates a local Merge Request description file (MR-<branch>.md) at the project root with title and description. No push, no GitLab API calls.",
+  "author": {
+    "name": "Tainmat"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Create MR",
+    "shortDescription": "Generate MR title and description as a local Markdown file",
+    "longDescription": "Analyzes commits and diff between the current branch and a target branch (default: develop), generates a structured MR description with sections: O que foi feito, Arquivos alterados, Motivação, Como testar. Saves the result as MR-<branch-name>.md in the project root. No push, no GitLab integration.",
+    "developerName": "Tainmat",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"]
+  }
+}
