@@ -28,6 +28,13 @@
       "source": "./",
       "strict": false,
       "skills": ["./skills/code-flow-mapper"]
+    },
+    {
+      "name": "create-mr",
+      "description": "Gera um arquivo local de descrição de Merge Request (MR-<branch>.md) na raiz do projeto com título e descrição. Sem push, sem chamadas à API do GitLab.",
+      "source": "./",
+      "strict": false,
+      "skills": ["./plugins/create-mr/skills"]
     }
   ]
 }
