@@ -1,0 +1,6 @@
+interface:
+  display_name: "Commit Conventional"
+  short_description: "Analisa o diff staged e gera commit em PT-BR seguindo Conventional Commits no formato tipo(escopo): pequena_descrição"
+
+policy:
+  allow_implicit_invocation: true
