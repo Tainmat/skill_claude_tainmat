@@ -1,0 +1,6 @@
+interface:
+  display_name: "Feature-Based Migrate"
+  short_description: "Executa a migração de uma page React para features/, separando View + Hook Controller e movendo hooks, api, redux e helpers para o domínio correto"
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Feature-Based Implement"
+  short_description: "Analisa uma feature React/Next.js e gera plano de migração para arquitetura feature-based com padrão View + Hook Controller"
+
+policy:
+  allow_implicit_invocation: true
