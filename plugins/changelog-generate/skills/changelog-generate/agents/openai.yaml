@@ -1,0 +1,6 @@
+interface:
+  display_name: "Changelog Generate"
+  short_description: "Compara a branch com master, determina a versão SemVer (major/minor/patch) pelos commits e gera CHANGELOG-{versão}.md em PT-BR"
+
+policy:
+  allow_implicit_invocation: true
