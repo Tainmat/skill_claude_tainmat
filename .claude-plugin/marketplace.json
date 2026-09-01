@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Skills personalizadas do Tainmat para Claude Code",
-    "version": "1.1.0"
+    "version": "1.2.0"
   },
   "plugins": [
     {
@@ -35,6 +35,34 @@
       "source": "./",
       "strict": false,
       "skills": ["./plugins/create-mr/skills"]
+    },
+    {
+      "name": "feature-based-implement",
+      "description": "Analisa uma feature React/Next.js e gera plano de migração para arquitetura feature-based com padrão View + Hook Controller",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/feature-based-implement"]
+    },
+    {
+      "name": "feature-based-migrate",
+      "description": "Executa a migração de uma page React para features/, separando View + Hook Controller e movendo hooks, api, redux e helpers para o domínio correto",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/feature-based-migrate"]
+    },
+    {
+      "name": "commit-conventional",
+      "description": "Analisa o diff staged e gera commit em PT-BR seguindo Conventional Commits no formato tipo(escopo): pequena_descrição",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/commit-conventional"]
+    },
+    {
+      "name": "changelog-generate",
+      "description": "Compara a branch com master, determina a versão SemVer (major/minor/patch) pelos commits e gera CHANGELOG-{versão}.md em PT-BR",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/changelog-generate"]
     }
   ]
 }
