@@ -11,6 +11,7 @@ Analisar as alterações staged no git e gerar um commit seguindo o padrão **Co
 
 ```text
 tipo(escopo): pequena_descrição
+tipo(escopo)!: pequena_descrição   ← breaking change (forma curta)
 ```
 
 ---
@@ -48,6 +49,21 @@ Analise o diff staged e classifique com base no que foi alterado:
 | `perf` | Melhorias de performance sem mudança de comportamento |
 | `ci` | Alterações em pipelines CI/CD (`.gitlab-ci.yml`, `.github/workflows/`) |
 | `revert` | Reversão de um commit anterior |
+
+**Breaking change** — quando a alteração quebra compatibilidade com versões anteriores, adicione `!` após o tipo (e escopo, se houver):
+
+```text
+feat!: remove endpoint legado de autenticação
+fix(auth)!: altera formato do token JWT
+```
+
+Se precisar detalhar o impacto, adicione `BREAKING CHANGE:` no corpo do commit (separado por linha em branco):
+
+```bash
+git commit -m "feat(api)!: altera contrato da resposta de contagens
+
+BREAKING CHANGE: o campo 'itens' foi renomeado para 'itensPrevistos'"
+```
 
 **Em caso de dúvida entre dois tipos**, prefira o de maior impacto (ex: `feat` > `refactor`).
 
@@ -100,6 +116,7 @@ chore(deps): atualiza react-query para v5
 docs(skills): adiciona skill de commit conventional
 style(shared): aplica formatação prettier nos utilitários
 test(auth): adiciona testes unitários para useLogin
+feat(api)!: altera contrato da resposta de contagens
 ```
 
 ### Exemplos incorretos
