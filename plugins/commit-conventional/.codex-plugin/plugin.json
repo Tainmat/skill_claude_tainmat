@@ -1,0 +1,17 @@
+{
+  "name": "commit-conventional",
+  "version": "1.0.0",
+  "description": "Analyzes staged git changes and generates a commit message in Brazilian Portuguese following the Conventional Commits standard, with format tipo(escopo): pequena_descrição. Supports breaking changes via ! notation and BREAKING CHANGE footer.",
+  "author": {
+    "name": "Tainmat"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Commit Conventional",
+    "shortDescription": "Gera commit em PT-BR no formato tipo(escopo): descrição seguindo Conventional Commits",
+    "longDescription": "Lê o git diff --staged, classifica o tipo (feat, fix, refactor, chore, etc.), deriva o escopo a partir do caminho dos arquivos modificados, escreve a descrição em português no modo imperativo e confirma com o usuário antes de executar o commit. Suporta breaking changes com ! e BREAKING CHANGE no corpo.",
+    "developerName": "Tainmat",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"]
+  }
+}

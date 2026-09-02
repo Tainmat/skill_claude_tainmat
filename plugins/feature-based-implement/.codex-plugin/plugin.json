@@ -1,0 +1,17 @@
+{
+  "name": "feature-based-implement",
+  "version": "1.0.0",
+  "description": "Analyzes a React/Next.js feature and generates a migration plan to feature-based architecture following the View + Hook Controller pattern (Component.tsx + useComponent.ts + index.ts).",
+  "author": {
+    "name": "Tainmat"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Feature-Based Implement",
+    "shortDescription": "Gera plano de migração para arquitetura feature-based com padrão View + Hook Controller",
+    "longDescription": "Analisa a estrutura atual do projeto React/Next.js, localiza os arquivos da feature, identifica o domínio de negócio e gera um plano completo de migração para a arquitetura feature-based. Produz tabela De-Para, nova estrutura de diretórios, código refatorado e checklist de migração salvo como Markdown na raiz do projeto.",
+    "developerName": "Tainmat",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"]
+  }
+}

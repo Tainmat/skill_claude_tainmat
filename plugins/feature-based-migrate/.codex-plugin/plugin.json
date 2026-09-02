@@ -1,0 +1,17 @@
+{
+  "name": "feature-based-migrate",
+  "version": "1.0.0",
+  "description": "Executes the physical migration of a React page to feature-based architecture — finds all related files (hooks, api, redux, helpers), creates the features/ domain structure, separates View + Hook Controller, moves files, and updates all imports across the project.",
+  "author": {
+    "name": "Tainmat"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Feature-Based Migrate",
+    "shortDescription": "Executa a migração de uma page React para features/, separando View + Hook Controller",
+    "longDescription": "Dado um caminho de page, rastreia recursivamente todos os arquivos relacionados (hooks, api, redux, helpers, componentes exclusivos), confirma a lista com o usuário, cria a estrutura src/features/{dominio}/, separa a page em Component.tsx + useComponent.ts + index.ts, move os arquivos de suporte, atualiza todos os imports no projeto e valida com tsc --noEmit.",
+    "developerName": "Tainmat",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"]
+  }
+}

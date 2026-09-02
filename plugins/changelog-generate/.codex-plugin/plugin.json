@@ -1,0 +1,17 @@
+{
+  "name": "changelog-generate",
+  "version": "1.0.0",
+  "description": "Compares the current branch against master, classifies all commits by Conventional Commits type, determines the next SemVer version (major/minor/patch) with justification, and generates two changelog files: a technical CHANGELOG-{version}.md and a user-facing CHANGELOG-USER-{version}.md in plain Brazilian Portuguese.",
+  "author": {
+    "name": "Tainmat"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Changelog Generate",
+    "shortDescription": "Gera CHANGELOG técnico e versão para o usuário com versionamento SemVer automático",
+    "longDescription": "Compara a branch atual com master, coleta todos os commits, determina a próxima versão pelo SemVer (MAJOR para breaking changes, MINOR para feat, PATCH para fix/refactor/chore), confirma com o usuário e gera dois arquivos: CHANGELOG-{versão}.md com categorias técnicas e CHANGELOG-USER-{versão}.md em linguagem simples para o usuário final.",
+    "developerName": "Tainmat",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"]
+  }
+}
