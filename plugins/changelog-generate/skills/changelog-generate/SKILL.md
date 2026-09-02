@@ -1,13 +1,16 @@
 ---
 name: changelog-generate
-description: Use when the user wants to generate a CHANGELOG file — compares current branch against master, collects all commits, determines the next SemVer version (major/minor/patch) based on Conventional Commits, and saves a CHANGELOG-{version}.md file. Triggers on "gera o changelog", "cria o changelog", "gerar changelog", "versão do changelog".
+description: Use when the user wants to generate a CHANGELOG file — compares current branch against master, collects all commits, determines the next SemVer version (major/minor/patch) based on Conventional Commits, and saves both CHANGELOG-{version}.md (technical) and CHANGELOG-USER-{version}.md (user-facing in plain language). Triggers on "gera o changelog", "cria o changelog", "gerar changelog", "versão do changelog".
 ---
 
 # Changelog Generate
 
 ## Objetivo
 
-Comparar a branch atual com `master`, analisar todos os commits incluídos, determinar o próximo número de versão pelo **SemVer** e gerar o arquivo `CHANGELOG-{versão}.md` em **Português do Brasil**.
+Comparar a branch atual com `master`, analisar todos os commits incluídos, determinar o próximo número de versão pelo **SemVer** e gerar **dois arquivos** em **Português do Brasil**:
+
+- `CHANGELOG-{versão}.md` — versão **técnica**, para desenvolvedores e equipe de produto
+- `CHANGELOG-USER-{versão}.md` — versão **para o usuário**, em linguagem simples, descrevendo o que muda na experiência de uso do sistema
 
 ---
 
@@ -201,15 +204,107 @@ Use **exatamente** esta estrutura:
 
 ---
 
-## Passo 6 — Informar o resultado
+## Passo 6 — Gerar o CHANGELOG do usuário
 
-Após salvar o arquivo, informe ao usuário:
+Salve o changelog do usuário como `CHANGELOG-USER-{versão}.md` na raiz do projeto.
 
-> Changelog gerado: `CHANGELOG-{versão}.md`
+### Quais commits incluir
+
+Inclua **apenas** commits que impactam diretamente a experiência do usuário:
+
+| Tipo | Incluir? | Motivo |
+| --- | --- | --- |
+| `feat:` | ✅ Sim | Nova funcionalidade visível para o usuário |
+| `fix:` | ✅ Sim | Correção de algo que o usuário percebia como problema |
+| `perf:` | ✅ Sim (se perceptível) | Melhoria de velocidade que o usuário sente |
+| `refactor:` | ❌ Não | Mudança interna, invisível para o usuário |
+| `chore:` | ❌ Não | Manutenção técnica, sem impacto na tela |
+| `style:` | ⚠️ Só se visual | Incluir apenas se alterar aparência de telas |
+| `docs:` | ❌ Não | Documentação interna |
+| `test:` / `ci:` / `build:` | ❌ Não | Infraestrutura, sem impacto na experiência |
+| `BREAKING CHANGE` | ✅ Sim | Mudança de comportamento que o usuário vai notar |
+
+### Como traduzir commits para linguagem do usuário
+
+Transforme a mensagem técnica em uma frase clara, na perspectiva de quem usa o sistema:
+
+| Mensagem técnica | Linguagem do usuário |
+| --- | --- |
+| `feat(auth): adiciona edição de usuário` | Foi inserida a funcionalidade de editar o usuário na tela de Cadastro de Usuário |
+| `fix(contagens): corrige cálculo de total de itens` | Corrigido o cálculo do total de itens na tela de Contagem em Andamento |
+| `feat(equipamentos): adiciona filtro por subgrupo` | Agora é possível filtrar equipamentos por subgrupo na tela de Equipamentos |
+| `fix(login): corrige erro ao logar com matrícula inválida` | Corrigido o erro que aparecia ao tentar entrar com uma matrícula inválida |
+| `perf(contagens): reduz tempo de carregamento da lista` | A lista de contagens carrega mais rápido |
+
+**Regras de escrita:**
+
+- Use linguagem simples, sem termos técnicos (`hook`, `endpoint`, `slice`, `refactor`, etc.)
+- Escreva na perspectiva do usuário: o que **ele** pode fazer agora, ou o que **ele** parou de ver
+- Prefira frases completas e descritivas: mencione o nome da tela quando souber
+- Se o commit mencionar um escopo técnico (ex: `auth`, `contagens`), traduza para o nome da tela correspondente
+- Agrupe por área do sistema quando houver múltiplas mudanças na mesma tela
+
+### Estrutura do arquivo
+
+```markdown
+# O que há de novo — v{versão}
+
+> **Data:** {data atual dd/mm/aaaa}
+> **Versão:** {versão}
+
+---
+
+## ✨ Novidades
+
+{apenas commits feat: com impacto visível}
+
+- {Descrição em linguagem do usuário, mencionando a tela ou funcionalidade}
+- {Descrição em linguagem do usuário}
+
+---
+
+## 🐛 Correções
+
+{apenas commits fix: com impacto visível}
+
+- {Descrição da correção em linguagem do usuário}
+- {Descrição da correção em linguagem do usuário}
+
+---
+
+## ⚡ Melhorias
+
+{commits perf: perceptíveis e style: com impacto visual}
+
+- {Descrição da melhoria em linguagem do usuário}
+
+---
+
+## ⚠️ Mudanças Importantes
+
+{apenas se houver BREAKING CHANGE que afete o usuário}
+
+- {Descrição clara do que mudou e o que o usuário precisa saber ou fazer diferente}
+```
+
+**Regras adicionais:**
+
+- Omita seções vazias
+- Se não houver nenhum commit com impacto para o usuário, escreva: `> Nenhuma alteração visível para o usuário nesta versão.`
+- Não inclua hash de commits — o usuário não precisa dessa informação
+
+---
+
+## Passo 7 — Informar o resultado
+
+Após salvar os dois arquivos, informe ao usuário:
+
+> Changelogs gerados com sucesso:
 >
 > **Versão:** `{versão anterior}` → `{nova versão}` ({MAJOR/MINOR/PATCH})
-> **Commits incluídos:** {total}
-> **Arquivo salvo em:** `./CHANGELOG-{versão}.md`
+>
+> - `./CHANGELOG-{versão}.md` — versão técnica ({total} commits)
+> - `./CHANGELOG-USER-{versão}.md` — versão para o usuário ({total de itens visíveis} itens)
 
 ---
 
